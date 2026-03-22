@@ -1,0 +1,428 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #27ae60;
+    --accent-color: #f1c40f;
+    --text-color: #333;
+    --light-bg: #f5f6fa;
+    --header-height: 48px;
+    --sidebar-width: 320px;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --border-radius: 8px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow: hidden;
+    /* Prevent scrolling of body */
+}
+
+/* App Container */
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    background-color: var(--primary-color);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    background-color: #2c3e50;
+    padding: 20px;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-header h1 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.sidebar-header p {
+    font-size: 0.9rem;
+    color: #bdc3c7;
+    margin-top: 5px;
+}
+
+.search-container {
+    padding: 15px;
+    position: relative;
+    background-color: #34495e;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px 15px;
+    padding-right: 40px;
+    border-radius: 20px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-family: inherit;
+    outline: none;
+    transition: background-color 0.2s;
+}
+
+.search-container input:focus {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.search-container input::placeholder {
+    color: #bdc3c7;
+}
+
+.search-container i {
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #bdc3c7;
+}
+
+/* Tree List in Sidebar */
+.tree-list {
+    flex: 1;
+    overflow-y: auto;
+    list-style: none;
+    scrollbar-width: thin;
+    scrollbar-color: #7f8c8d #2c3e50;
+}
+
+.tree-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.tree-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.tree-list::-webkit-scrollbar-thumb {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+.tree-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.tree-item:hover,
+.tree-item.active {
+    background-color: #34495e;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.tree-item strong {
+    display: block;
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 4px;
+}
+
+.tree-item small {
+    display: block;
+    color: #95a5a6;
+    font-size: 0.85rem;
+    font-style: italic;
+}
+
+.tree-item p.location {
+    color: #bdc3c7;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+/* Main Map Area */
+.map-container {
+    flex: 1;
+    position: relative;
+    height: 100vh;
+}
+
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+/* Overlay Card */
+.info-card {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    left: 20px;
+    max-width: 400px;
+    /* On large screens, limit width */
+    background: white;
+    padding: 24px;
+    border-radius: var(--border-radius);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    transform: translateY(0);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Mobile responsive fixes for card positioning */
+@media (min-width: 768px) {
+    .info-card {
+        right: 40px;
+        left: auto;
+        bottom: 40px;
+        width: 360px;
+    }
+}
+
+.info-card.hidden {
+    transform: translateY(150%);
+    pointer-events: none;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #7f8c8d;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.info-card h2 {
+    color: var(--primary-color);
+    margin-bottom: 4px;
+    font-size: 1.5rem;
+}
+
+.info-card h3 {
+    color: #7f8c8d;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.info-card p {
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: background-color 0.2s, transform 0.1s;
+    width: 100%;
+}
+
+.btn-primary:hover {
+    background-color: #219150;
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.route-status {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    text-align: center;
+}
+
+/* Hamburger Menu (Mobile) */
+.menu-toggle {
+    display: none;
+    position: absolute;
+    top: 15px;
+    /* Moved slightly up */
+    left: 15px;
+    /* Moved slightly left */
+    z-index: 1001;
+    /* Above map and sidebar */
+    background: white;
+    border: none;
+    padding: 12px;
+    border-radius: 50%;
+    /* Make it round */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.menu-toggle:active {
+    background-color: #f0f0f0;
+}
+
+/* Leaflet Overrides */
+.leaflet-popup-content-wrapper {
+    border-radius: var(--border-radius);
+    padding: 5px;
+}
+
+.leaflet-popup-content h3 {
+    margin: 5px 0;
+    color: var(--primary-color);
+}
+
+.leaflet-popup-content p {
+    margin: 5px 0;
+}
+
+/* Custom Marker Styling */
+.custom-tree-marker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 2px solid #fff;
+    font-size: 16px;
+}
+
+.custom-tree-marker:hover {
+    transform: scale(1.15) translateY(-5px);
+    z-index: 999 !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+.custom-tree-marker.selected {
+    transform: scale(1.3) translateY(-10px);
+    z-index: 1000 !important;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 4px rgba(46, 204, 113, 0.4);
+}
+
+/* Background Colors for different fruits */
+.marker-banana {
+    background: linear-gradient(135deg, #f1c40f, #f39c12);
+}
+
+.marker-carambola {
+    background: linear-gradient(135deg, #f39c12, #d35400);
+}
+
+.marker-goiaba {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.marker-limao {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.marker-manga {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+}
+
+.marker-acerola {
+    background: linear-gradient(135deg, #e74c3c, #96281b);
+}
+
+.marker-coco {
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+}
+
+.marker-jambo {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.marker-mamao {
+    background: linear-gradient(135deg, #e67e22, #cf6d17);
+}
+
+.marker-uva {
+    background: linear-gradient(135deg, #8e44ad, #5b2c6f);
+}
+
+.marker-castanha {
+    background: linear-gradient(135deg, #795548, #5d4037);
+}
+
+.marker-default {
+    background: linear-gradient(135deg, #34495e, #2c3e50);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .sidebar {
+        position: absolute;
+        height: 100%;
+        width: 85%;
+        /* Don't cover fully on tablets, let user see map edge */
+        max-width: 320px;
+        /* But cap at 320px */
+        transform: translateX(-100%);
+        box-shadow: none;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+    }
+
+    /* Overlay for sidebar when open on mobile */
+    .sidebar.open::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: -100vw;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        pointer-events: auto;
+    }
+
+    .info-card {
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-radius: 15px 15px 0 0;
+        /* Rounded top only */
+        padding: 20px;
+        max-height: 50vh;
+        /* Max half screen height */
+        overflow-y: auto;
+    }
+}

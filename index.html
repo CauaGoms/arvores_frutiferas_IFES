@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapeamento de Árvores Frutíferas - Campus IFES Cachoeiro</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <!-- Leaflet Routing Machine CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <header class="sidebar-header">
+                <h1>Frutíferas IFES</h1>
+                <p>Campus Cachoeiro de Itapemirim</p>
+            </header>
+            
+            <div class="search-container">
+                <input type="text" id="search-input" placeholder="Buscar árvore...">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <ul id="tree-list" class="tree-list">
+                <!-- Items added dynamically -->
+            </ul>
+        </aside>
+
+        <!-- Use a hamburger menu for mobile -->
+        <button id="menu-toggle" class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <!-- Main Map Area -->
+        <main class="map-container">
+            <div id="map"></div>
+            
+            <!-- Floating info card (hidden by default) -->
+            <div id="info-card" class="info-card hidden">
+                <button id="close-card" class="close-btn">&times;</button>
+                <h2 id="card-title">Nome da Árvore</h2>
+                <h3 id="card-species">Espécie Científica</h3>
+                <p id="card-desc">Descrição do local.</p>
+                <div class="card-actions">
+                    <button id="btn-route" class="btn-primary">
+                        <i class="fas fa-route"></i> Traçar Rota
+                    </button>
+                    <div id="route-status" class="route-status"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
