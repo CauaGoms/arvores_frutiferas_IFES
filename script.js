@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then(data => {
             treesData = data.trees;
-            
+
             // Add markers to map
             treesData.forEach(tree => {
                 addMarker(tree);
@@ -132,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateTreeList() {
         treeList.innerHTML = '';
-        
+
         treesData.forEach(tree => {
             // Filter based on current tab
             if (currentTab === 'inseason' && !isTreeInSeason(tree)) {
@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     lineOptions: {
                         styles: [{ color: '#27ae60', opacity: 1, weight: 5 }]
                     },
-                    createMarker: function(i, wp, nWps) {
+                    createMarker: function (i, wp, nWps) {
                         if (i === nWps - 1) return null;
                         return L.marker(wp.latLng, {
                             draggable: true,
@@ -302,13 +302,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     show: false
                 }).addTo(map);
 
-                currentRouteControl.on('routingerror', function(e) {
+                currentRouteControl.on('routingerror', function (e) {
                     console.error('Routing error:', e);
                     alert('Não foi possível traçar a rota. Verifique se há caminhos mapeados até este local.');
                     btnRoute.textContent = 'Erro na Rota';
                 });
 
-                currentRouteControl.on('routesfound', function(e) {
+                currentRouteControl.on('routesfound', function (e) {
                     const routes = e.routes;
                     const summary = routes[0].summary;
                     const dist = (summary.totalDistance / 1000).toFixed(2);

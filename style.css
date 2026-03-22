@@ -3,18 +3,18 @@
     --ifes-primary: #27ae60;
     --ifes-secondary: #f39c12;
     --ifes-accent: #2ecc71;
-    
+
     /* Cores de Épocas */
     --season-active: #27ae60;
     --season-inactive: #95a5a6;
-    
+
     /* Base */
     --text-primary: #1a1a1a;
     --text-secondary: #666;
     --bg-light: #f8f9fa;
     --bg-white: #ffffff;
     --border-color: #e0e0e0;
-    
+
     /* Shadows */
     --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
@@ -27,7 +27,8 @@
     box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
     height: 100%;
     width: 100%;
 }
@@ -316,6 +317,7 @@ body {
     from {
         transform: translateY(100%);
     }
+
     to {
         transform: translateY(0);
     }
@@ -520,18 +522,53 @@ body {
 }
 
 /* Marker Colors */
-.marker-banana { background: linear-gradient(135deg, #f39c12, #f1c40f); }
-.marker-carambola { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-.marker-castanha { background: linear-gradient(135deg, #8b4513, #5c3317); }
-.marker-goiaba { background: linear-gradient(135deg, #e67e22, #d35400); }
-.marker-limao { background: linear-gradient(135deg, #2ecc71, #27ae60); }
-.marker-manga { background: linear-gradient(135deg, #e74c3c, #f39c12); }
-.marker-acerola { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-.marker-coco { background: linear-gradient(135deg, #1abc9c, #16a085); }
-.marker-jambo { background: linear-gradient(135deg, #9b59b6, #8e44ad); }
-.marker-mamao { background: linear-gradient(135deg, #f39c12, #e67e22); }
-.marker-uva { background: linear-gradient(135deg, #8e44ad, #5b2c6f); }
-.marker-default { background: linear-gradient(135deg, var(--ifes-primary), #0a3966); }
+.marker-banana {
+    background: linear-gradient(135deg, #f39c12, #f1c40f);
+}
+
+.marker-carambola {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.marker-castanha {
+    background: linear-gradient(135deg, #8b4513, #5c3317);
+}
+
+.marker-goiaba {
+    background: linear-gradient(135deg, #e67e22, #d35400);
+}
+
+.marker-limao {
+    background: linear-gradient(135deg, #2ecc71, #27ae60);
+}
+
+.marker-manga {
+    background: linear-gradient(135deg, #e74c3c, #f39c12);
+}
+
+.marker-acerola {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.marker-coco {
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+}
+
+.marker-jambo {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
+.marker-mamao {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+.marker-uva {
+    background: linear-gradient(135deg, #8e44ad, #5b2c6f);
+}
+
+.marker-default {
+    background: linear-gradient(135deg, var(--ifes-primary), #0a3966);
+}
 
 /* Leaflet Overrides */
 .leaflet-control-zoom {
@@ -540,7 +577,8 @@ body {
     border-radius: 8px;
 }
 
-.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
     background: var(--bg-white) !important;
     color: var(--ifes-primary) !important;
     border: none !important;
@@ -551,7 +589,8 @@ body {
     font-weight: 600;
 }
 
-.leaflet-control-zoom-in:hover, .leaflet-control-zoom-out:hover {
+.leaflet-control-zoom-in:hover,
+.leaflet-control-zoom-out:hover {
     background: var(--bg-light) !important;
 }
 
