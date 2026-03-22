@@ -22,31 +22,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardTitle = document.getElementById('card-title');
     const cardSpecies = document.getElementById('card-species');
     const cardDesc = document.getElementById('card-desc');
-    const seasonBadge = document.getElementById('season-badge');
-    const seasonText = document.getElementById('season-text');
-    const seasonMonths = document.getElementById('season-months');
-    const benefitsText = document.getElementById('benefits-text');
     const btnRoute = document.getElementById('btn-route');
     const routeStatus = document.getElementById('route-status');
     const closeCard = document.getElementById('close-card');
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.querySelector('.sidebar');
     const searchInput = document.getElementById('search-input');
-    const tabs = document.querySelectorAll('.tab-btn');
 
     let treesData = [];
     let markers = {};
     let currentRouteControl = null;
     let selectedTree = null;
-    let currentTab = 'all'; // 'all' or 'inseason'
 
     // Get current month (1-12)
     const currentMonth = new Date().getMonth() + 1;
-
-    // Helper: Check if tree is in season
-    function isTreeInSeason(tree) {
-        return tree.harvestSeason.months.includes(currentMonth);
-    }
 
     // Helper: Determine Marker Style
     function getTreeStyle(commonName) {
@@ -137,18 +126,11 @@ document.addEventListener('DOMContentLoaded', () => {
         treeList.innerHTML = '';
 
         treesData.forEach(tree => {
-            // Filter based on current tab
-            if (currentTab === 'inseason' && !isTreeInSeason(tree)) {
-                return;
-            }
-
             const li = document.createElement('li');
             li.className = 'tree-item';
             li.dataset.id = tree.id;
-            li.dataset.inSeason = isTreeInSeason(tree) ? 'true' : 'false';
 
             const style = getTreeStyle(tree.commonName);
-            const inSeason = isTreeInSeason(tree);
 
             li.innerHTML = `
                 <div class="tree-item-content">
@@ -159,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="tree-item-icon ${style.colorClass}">
                         <i class="fas ${style.icon}"></i>
                     </div>
-                    <div class="season-badge-item ${inSeason ? 'in-season' : 'out-season'}"></div>
                 </div>
             `;
 
@@ -188,13 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
         cardTitle.textContent = tree.commonName;
         cardSpecies.textContent = tree.species;
         cardDesc.textContent = tree.description;
-        benefitsText.textContent = tree.benefits;
-
-        // Update Season Badge
-        const inSeason = isTreeInSeason(tree);
-        seasonBadge.className = `season-badge ${inSeason ? 'in-season' : 'out-season'}`;
-        seasonText.textContent = tree.harvestSeason.pt;
-        seasonMonths.textContent = tree.harvestSeason.pt;
 
         infoCard.classList.remove('hidden');
 
@@ -224,16 +198,6 @@ document.addEventListener('DOMContentLoaded', () => {
         btnRoute.disabled = false;
         btnRoute.textContent = 'Traçar Rota';
     }
-
-    // Tab switching
-    tabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            tabs.forEach(t => t.classList.remove('active'));
-            tab.classList.add('active');
-            currentTab = tab.dataset.tab;
-            updateTreeList();
-        });
-    });
 
     // Search
     searchInput.addEventListener('input', (e) => {
