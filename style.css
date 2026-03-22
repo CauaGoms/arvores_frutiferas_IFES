@@ -244,13 +244,13 @@ body {
 /* Info Card */
 .info-card {
     position: fixed;
-    bottom: auto;
+    bottom: 0;
     right: 0;
     left: auto;
-    top: 0;
+    top: auto;
     width: 33%;
-    height: 100vh;
-    max-height: 100vh;
+    height: auto;
+    max-height: 60vh;
     max-width: 100%;
     background: var(--bg-white);
     border-radius: 0;
@@ -589,6 +589,7 @@ body {
         from {
             transform: translateY(100%);
         }
+
         to {
             transform: translateY(0);
         }
