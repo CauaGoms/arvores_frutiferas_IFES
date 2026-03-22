@@ -247,16 +247,16 @@ body {
     bottom: 0;
     right: 0;
     left: 0;
-    max-height: 90vh;
+    max-height: 45vh;
     max-width: 100%;
     background: var(--bg-white);
     border-radius: 20px 20px 0 0;
-    padding: 20px;
+    padding: 16px;
     box-shadow: var(--shadow-lg);
     z-index: 1000;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 12px;
     overflow-y: auto;
     transform: translateY(0);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -308,22 +308,23 @@ body {
 }
 
 #card-title {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 700;
     color: var(--ifes-primary);
     margin: 0;
+    margin-bottom: 4px;
 }
 
 .card-species {
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 500;
     color: var(--text-secondary);
     font-style: italic;
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
 
 .card-location {
-    font-size: 0.95rem;
+    font-size: 0.85rem;
     color: var(--text-secondary);
     display: flex;
     align-items: center;
@@ -355,14 +356,14 @@ body {
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-md);
-    min-height: 42px;
+    min-height: 40px;
 }
 
 .btn-primary:hover {
@@ -554,8 +555,8 @@ body {
         left: 0;
         right: 0;
         border-radius: 20px 20px 0 0;
-        max-height: 60vh;
-        padding: 24px 16px 80px 16px;
+        max-height: 40vh;
+        padding: 16px 16px 80px 16px;
         overflow-y: auto;
         z-index: 100;
     }
@@ -565,7 +566,7 @@ body {
     }
 
     #card-title {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
 
     /* Leaflet controls positioning for mobile */
