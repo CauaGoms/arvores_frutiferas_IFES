@@ -1,0 +1,905 @@
+{
+  "trees": [
+    {
+      "id": 1,
+      "species": "Musa × paradisiaca L..",
+      "commonName": "Bananeira",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.803644,
+      "longitude": -41.155042,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Rica em potássio, fibras e vitaminas"
+    },
+    {
+      "id": 2,
+      "species": "Averrhoa carambola",
+      "commonName": "Caramboleiro",
+      "description": "Em frente ao IFES",
+      "latitude": -20.802756,
+      "longitude": -41.155506,
+      "harvestSeason": {
+        "months": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "inSeason": true,
+        "pt": "Outubro a Fevereiro (Em Época!)"
+      },
+      "benefits": "Vitamina C, baixa caloria, antioxidante"
+    },
+    {
+      "id": 3,
+      "species": "Pachira glabra",
+      "commonName": "Castanha-do-Maranhão",
+      "description": "Do lado do Carioca Lanches",
+      "latitude": -20.80335,
+      "longitude": -41.155306,
+      "harvestSeason": {
+        "months": [
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Agosto a Dezembro"
+      },
+      "benefits": "Gorduras saudáveis, proteínas vegetais"
+    },
+    {
+      "id": 4,
+      "species": "Pachira glabra",
+      "commonName": "Castanha-do-Maranhão",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.803578,
+      "longitude": -41.154328,
+      "harvestSeason": {
+        "months": [
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Agosto a Dezembro"
+      },
+      "benefits": "Gorduras saudáveis, proteínas vegetais"
+    },
+    {
+      "id": 5,
+      "species": "Psidium guajava",
+      "commonName": "Goiabeira",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.803631,
+      "longitude": -41.154642,
+      "harvestSeason": {
+        "months": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "inSeason": true,
+        "pt": "Agosto a Novembro"
+      },
+      "benefits": "Vitamina C, fibras, antioxidantes"
+    },
+    {
+      "id": 6,
+      "species": "Psidium guajava",
+      "commonName": "Goiabeira",
+      "description": "Ao lado da quadra",
+      "latitude": -20.8024,
+      "longitude": -41.153864,
+      "harvestSeason": {
+        "months": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "inSeason": true,
+        "pt": "Agosto a Novembro"
+      },
+      "benefits": "Vitamina C, fibras, antioxidantes"
+    },
+    {
+      "id": 7,
+      "species": "Psidium guajava",
+      "commonName": "Goiabeira",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.803633,
+      "longitude": -41.154619,
+      "harvestSeason": {
+        "months": [
+          8,
+          9,
+          10,
+          11
+        ],
+        "inSeason": true,
+        "pt": "Agosto a Novembro"
+      },
+      "benefits": "Vitamina C, fibras, antioxidantes"
+    },
+    {
+      "id": 8,
+      "species": "Citrus × latifolia",
+      "commonName": "Limoeiro",
+      "description": "Atrás do Bloco 3",
+      "latitude": -20.803042,
+      "longitude": -41.154261,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Vitamina C, desintoxicante, antiacidez"
+    },
+    {
+      "id": 9,
+      "species": "Citrus × latifolia",
+      "commonName": "Limoeiro",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.803631,
+      "longitude": -41.154656,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Vitamina C, desintoxicante, antiacidez"
+    },
+    {
+      "id": 10,
+      "species": "Citrus × latifolia",
+      "commonName": "Limoeiro",
+      "description": "Atrás do Bloco 7",
+      "latitude": -20.802697,
+      "longitude": -41.154058,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Vitamina C, desintoxicante, antiacidez"
+    },
+    {
+      "id": 11,
+      "species": "Citrus × latifolia",
+      "commonName": "Limoeiro",
+      "description": "Atrás do refeitório",
+      "latitude": -20.803633,
+      "longitude": -41.155078,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Vitamina C, desintoxicante, antiacidez"
+    },
+    {
+      "id": 12,
+      "species": "Mangifera indica.",
+      "commonName": "Mangueira",
+      "description": "Atrás do Bloco 1",
+      "latitude": -20.803172,
+      "longitude": -41.154339,
+      "harvestSeason": {
+        "months": [
+          11,
+          12,
+          1,
+          2,
+          3
+        ],
+        "inSeason": true,
+        "pt": "Novembro a Março (Em Época!)"
+      },
+      "benefits": "Vitamina A, fibras, antioxidantes"
+    },
+    {
+      "id": 13,
+      "species": "Mangifera indica.",
+      "commonName": "Mangueira",
+      "description": "Em frente ao IFES",
+      "latitude": -20.802647,
+      "longitude": -41.155578,
+      "harvestSeason": {
+        "months": [
+          11,
+          12,
+          1,
+          2,
+          3
+        ],
+        "inSeason": true,
+        "pt": "Novembro a Março (Em Época!)"
+      },
+      "benefits": "Vitamina A, fibras, antioxidantes"
+    },
+    {
+      "id": 14,
+      "species": "Malpighia emarginata",
+      "commonName": "Pé de Acerola",
+      "description": "Atrás do Bloco 5",
+      "latitude": -20.802858,
+      "longitude": -41.154139,
+      "harvestSeason": {
+        "months": [
+          10,
+          11,
+          12,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "inSeason": true,
+        "pt": "Outubro a Maio (Em Época!)"
+      },
+      "benefits": "Vitamina C ultra concentrada, antienvelhecimento"
+    },
+    {
+      "id": 15,
+      "species": "Malpighia emarginata",
+      "commonName": "Pé de Acerola",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.803653,
+      "longitude": -41.154578,
+      "harvestSeason": {
+        "months": [
+          10,
+          11,
+          12,
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "inSeason": true,
+        "pt": "Outubro a Maio (Em Época!)"
+      },
+      "benefits": "Vitamina C ultra concentrada, antienvelhecimento"
+    },
+    {
+      "id": 16,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802892,
+      "longitude": -41.15495,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 17,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802803,
+      "longitude": -41.1549,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 18,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802764,
+      "longitude": -41.154872,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 19,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802728,
+      "longitude": -41.154844,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 20,
+      "species": "Psidium guajava",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802708,
+      "longitude": -41.154836,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 21,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802675,
+      "longitude": -41.154817,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 22,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802636,
+      "longitude": -41.154797,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 23,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802636,
+      "longitude": -41.154797,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 24,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802592,
+      "longitude": -41.154764,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 25,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802581,
+      "longitude": -41.154753,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 26,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802556,
+      "longitude": -41.154736,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 27,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802506,
+      "longitude": -41.154697,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 28,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802461,
+      "longitude": -41.154669,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 29,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802381,
+      "longitude": -41.154622,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 30,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802344,
+      "longitude": -41.154597,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 31,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802272,
+      "longitude": -41.154544,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 32,
+      "species": "Butia arenicola",
+      "commonName": "Pé de Coqueirinho",
+      "description": "Atrás dos blocos pares",
+      "latitude": -20.802203,
+      "longitude": -41.154497,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Água eletrolítica, gorduras saudáveis"
+    },
+    {
+      "id": 33,
+      "species": "Syzygium malaccense",
+      "commonName": "Pé de Jambo",
+      "description": "Entre o Bloco 5 e Bloco 7",
+      "latitude": -20.802725,
+      "longitude": -41.15435,
+      "harvestSeason": {
+        "months": [
+          12,
+          1,
+          2,
+          3
+        ],
+        "inSeason": true,
+        "pt": "Dezembro a Março (Em Época!)"
+      },
+      "benefits": "Baixa caloria, fibras, vitamina C"
+    },
+    {
+      "id": 34,
+      "species": "Syzygium malaccense",
+      "commonName": "Pé de Jambo",
+      "description": "Entre o Bloco 7 e Bloco 9",
+      "latitude": -20.80255,
+      "longitude": -41.154236,
+      "harvestSeason": {
+        "months": [
+          12,
+          1,
+          2,
+          3
+        ],
+        "inSeason": true,
+        "pt": "Dezembro a Março (Em Época!)"
+      },
+      "benefits": "Baixa caloria, fibras, vitamina C"
+    },
+    {
+      "id": 35,
+      "species": "Syzygium malaccense",
+      "commonName": "Pé de Jambo",
+      "description": "Entre o Bloco 4 e Bloco 6",
+      "latitude": -20.802733,
+      "longitude": -41.1546,
+      "harvestSeason": {
+        "months": [
+          12,
+          1,
+          2,
+          3
+        ],
+        "inSeason": true,
+        "pt": "Dezembro a Março (Em Época!)"
+      },
+      "benefits": "Baixa caloria, fibras, vitamina C"
+    },
+    {
+      "id": 36,
+      "species": "Carica papaya L.",
+      "commonName": "Pé de mamão",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.803669,
+      "longitude": -41.154606,
+      "harvestSeason": {
+        "months": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12
+        ],
+        "inSeason": true,
+        "pt": "Disponível o ano todo"
+      },
+      "benefits": "Papaína (digestão), vitamina C e A"
+    },
+    {
+      "id": 37,
+      "species": "Vitis vinifera.",
+      "commonName": "Videira",
+      "description": "Atrás do Bloco 0",
+      "latitude": -20.80365,
+      "longitude": -41.15475,
+      "harvestSeason": {
+        "months": [
+          10,
+          11,
+          12,
+          1,
+          2
+        ],
+        "inSeason": true,
+        "pt": "Outubro a Fevereiro (Em Época!)"
+      },
+      "benefits": "Antioxidantes, resveratrol, fibras"
+    }
+  ]
+}

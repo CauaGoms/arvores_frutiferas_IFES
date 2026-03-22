@@ -1,16 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize Map
-    // Start centered on the approximate location of the campus or a default view if data loads
     const map = L.map('map', {
-        zoomControl: false // Disable default zoom control to add it later in a different position
-    }).setView([-20.803, -41.155], 18); // Default to IFES Cachoeiro approx coords
+        zoomControl: false
+    }).setView([-20.803, -41.155], 18);
 
-    // Add Zoom Control to top-right to avoid conflict with sidebar toggle
     L.control.zoom({
         position: 'topright'
     }).addTo(map);
 
-    // Add Tile Layer (OpenStreetMap)
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
         maxZoom: 19
@@ -22,22 +19,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardTitle = document.getElementById('card-title');
     const cardSpecies = document.getElementById('card-species');
     const cardDesc = document.getElementById('card-desc');
+    const seasonBadge = document.getElementById('season-badge');
+    const seasonText = document.getElementById('season-text');
+    const seasonMonths = document.getElementById('season-months');
+    const benefitsText = document.getElementById('benefits-text');
     const btnRoute = document.getElementById('btn-route');
     const routeStatus = document.getElementById('route-status');
     const closeCard = document.getElementById('close-card');
     const menuToggle = document.getElementById('menu-toggle');
     const sidebar = document.querySelector('.sidebar');
     const searchInput = document.getElementById('search-input');
+    const tabs = document.querySelectorAll('.tab-btn');
 
-    let trees = [];
+    let treesData = [];
     let markers = {};
     let currentRouteControl = null;
     let selectedTree = null;
+    let currentTab = 'all'; // 'all' or 'inseason'
 
-    // Helper: Determine Marker Style based on Tree Name
-    function getTreeStyle(name) {
-        const lowerName = name.toLowerCase();
+    // Get current month (1-12)
+    const currentMonth = new Date().getMonth() + 1;
 
+    // Helper: Check if tree is in season
+    function isTreeInSeason(tree) {
+        return tree.harvestSeason.months.includes(currentMonth);
+    }
+
+    // Helper: Determine Marker Style
+    function getTreeStyle(commonName) {
+        const lowerName = commonName.toLowerCase();
         let style = { colorClass: 'marker-default', icon: 'fa-tree' };
 
         if (lowerName.includes('banana')) {
@@ -51,13 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
         } else if (lowerName.includes('limo')) {
             style = { colorClass: 'marker-limao', icon: 'fa-lemon' };
         } else if (lowerName.includes('mangueira') || lowerName.includes('manga')) {
-            style = { colorClass: 'marker-manga', icon: 'fa-cloud' }; // Shape somewhat like mango
+            style = { colorClass: 'marker-manga', icon: 'fa-cloud' };
         } else if (lowerName.includes('acerola')) {
             style = { colorClass: 'marker-acerola', icon: 'fa-circle' };
         } else if (lowerName.includes('coqueirinho') || lowerName.includes('butia')) {
             style = { colorClass: 'marker-coco', icon: 'fa-tree' };
         } else if (lowerName.includes('jambo')) {
-            style = { colorClass: 'marker-jambo', icon: 'fa-tint' }; // Teardrop shape
+            style = { colorClass: 'marker-jambo', icon: 'fa-tint' };
         } else if (lowerName.includes('mamão')) {
             style = { colorClass: 'marker-mamao', icon: 'fa-leaf' };
         } else if (lowerName.includes('videira')) {
@@ -72,165 +82,97 @@ document.addEventListener('DOMContentLoaded', () => {
         return L.divIcon({
             className: `custom-tree-marker ${style.colorClass} ${isSelected ? 'selected' : ''}`,
             html: `<i class="fas ${style.icon}"></i>`,
-            iconSize: [36, 36], // Slightly larger for better visibility
+            iconSize: [36, 36],
             iconAnchor: [18, 18],
             popupAnchor: [0, -20]
         });
     }
 
-    // Helper: Parse CSV Line securely dealing with quotes
-    function parseCSVLine(line) {
-        const result = [];
-        let startValueIndex = 0;
-        let inQuotes = false;
-
-        for (let i = 0; i < line.length; i++) {
-            if (line[i] === '"') {
-                inQuotes = !inQuotes;
-            } else if (line[i] === ',' && !inQuotes) {
-                let value = line.substring(startValueIndex, i).trim();
-                // Remove surrounding quotes if they exist
-                if (value.startsWith('"') && value.endsWith('"')) {
-                    value = value.substring(1, value.length - 1);
-                }
-                // Unescape double quotes
-                value = value.replace(/""/g, '"');
-                result.push(value);
-                startValueIndex = i + 1;
-            }
-        }
-        // Push the last value
-        let value = line.substring(startValueIndex).trim();
-        if (value.startsWith('"') && value.endsWith('"')) {
-            value = value.substring(1, value.length - 1);
-        }
-        value = value.replace(/""/g, '"');
-        result.push(value);
-
-        return result;
-    }
-
-    // Helper: Parse DMS coordinates to Decimal Degrees
-    function parseDMS(dmsStr) {
-        if (!dmsStr) return null;
-        // Expected format: 20°48'13.12"S or similar
-        // Clean up the string first
-        const cleanStr = dmsStr.replace(/\s/g, '').trim();
-
-        // Regex to capture degrees, minutes, seconds and direction
-        const regex = /(\d+)[°º](\d+)['’](\d+(?:\.\d+)?)["”]([NSWE])/i;
-        const match = cleanStr.match(regex);
-
-        if (match) {
-            const degrees = parseFloat(match[1]);
-            const minutes = parseFloat(match[2]);
-            const seconds = parseFloat(match[3]);
-            const direction = match[4].toUpperCase();
-
-            let dd = degrees + minutes / 60 + seconds / 3600;
-
-            if (direction === 'S' || direction === 'W') {
-                dd = dd * -1;
-            }
-            return dd;
-        }
-        return null;
-    }
-
-    // Load Data
-    fetch('arvores_frutiferas_IFES.csv')
+    // Load data from JSON
+    fetch('trees-data.json')
         .then(response => {
-            if (!response.ok) {
-                throw new Error("Erro ao carregar o arquivo CSV.");
-            }
-            return response.text();
+            if (!response.ok) throw new Error('Erro ao carregar dados');
+            return response.json();
         })
-        .then(csvText => {
-            const lines = csvText.trim().split('\n');
-            // Skip header (index 0)
+        .then(data => {
+            treesData = data.trees;
+            
+            // Add markers to map
+            treesData.forEach(tree => {
+                addMarker(tree);
+            });
 
-            for (let i = 1; i < lines.length; i++) {
-                if (!lines[i].trim()) continue;
+            // Add items to list
+            updateTreeList();
 
-                const cols = parseCSVLine(lines[i]);
-                // Columns: [0] Espécie, [1] Nome Popular, [2] Descrição, [3] Coordenada 1, [4] Coordenada 2
-
-                if (cols.length >= 5) {
-                    const lat = parseDMS(cols[3]);
-                    const lng = parseDMS(cols[4]);
-
-                    if (lat && lng) {
-                        const tree = {
-                            id: i,
-                            species: cols[0],
-                            commonName: cols[1],
-                            description: cols[2],
-                            lat: lat,
-                            lng: lng
-                        };
-                        trees.push(tree);
-                        addMarker(tree);
-                        addListItem(tree);
-                    }
-                }
-            }
-            // Fit bounds to show all markers
-            if (trees.length > 0) {
+            // Fit bounds
+            if (Object.keys(markers).length > 0) {
                 const group = new L.featureGroup(Object.values(markers));
                 map.fitBounds(group.getBounds().pad(0.1));
             }
         })
-        .catch(err => console.error("Erro:", err));
+        .catch(err => console.error('Erro:', err));
 
     function addMarker(tree) {
         const style = getTreeStyle(tree.commonName);
         const icon = createCustomIcon(style, false);
 
-        const marker = L.marker([tree.lat, tree.lng], { icon: icon })
+        const marker = L.marker([tree.latitude, tree.longitude], { icon: icon })
             .addTo(map)
-            .bindPopup(`<b>${tree.commonName}</b><br>${tree.species}`);
+            .bindPopup(`<b>${tree.commonName}</b><br><small>${tree.species}</small>`);
 
         marker.on('click', () => {
             selectTree(tree);
         });
 
-        // Store style for later use
         marker.treeStyle = style;
+        marker.treeId = tree.id;
         markers[tree.id] = marker;
     }
 
-    function addListItem(tree) {
-        const li = document.createElement('li');
-        li.className = 'tree-item';
+    function updateTreeList() {
+        treeList.innerHTML = '';
+        
+        treesData.forEach(tree => {
+            // Filter based on current tab
+            if (currentTab === 'inseason' && !isTreeInSeason(tree)) {
+                return;
+            }
 
-        // Get icon for the list too
-        const style = getTreeStyle(tree.commonName);
+            const li = document.createElement('li');
+            li.className = 'tree-item';
+            li.dataset.id = tree.id;
+            li.dataset.inSeason = isTreeInSeason(tree) ? 'true' : 'false';
 
-        li.innerHTML = `
-            <div style="display:flex; align-items:center; justify-content:space-between;">
-                <div>
+            const style = getTreeStyle(tree.commonName);
+            const inSeason = isTreeInSeason(tree);
+
+            li.innerHTML = `
+                <div class="tree-item-content">
                     <strong>${tree.commonName}</strong>
                     <small>${tree.species}</small>
                 </div>
-                <div class="custom-tree-marker ${style.colorClass}" style="position:relative; width:24px; height:24px; font-size:10px; border:1px solid white;">
-                    <i class="fas ${style.icon}"></i>
+                <div style="display: flex; gap: 8px; align-items: center;">
+                    <div class="tree-item-icon ${style.colorClass}">
+                        <i class="fas ${style.icon}"></i>
+                    </div>
+                    <div class="season-badge-item ${inSeason ? 'in-season' : 'out-season'}"></div>
                 </div>
-            </div>
-            <p class="location"><i class="fas fa-map-marker-alt"></i> ${tree.description}</p>
-        `;
-        li.dataset.id = tree.id;
-        li.addEventListener('click', () => {
-            selectTree(tree);
-            // On mobile, close sidebar after selection
-            if (window.innerWidth <= 768) {
-                sidebar.classList.remove('open');
-            }
+            `;
+
+            li.addEventListener('click', () => {
+                selectTree(tree);
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('open');
+                }
+            });
+
+            treeList.appendChild(li);
         });
-        treeList.appendChild(li);
     }
 
     function selectTree(tree) {
-        // Reset previously selected marker
+        // Reset previous marker
         if (selectedTree && markers[selectedTree.id]) {
             const prevMarker = markers[selectedTree.id];
             prevMarker.setIcon(createCustomIcon(prevMarker.treeStyle, false));
@@ -243,6 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
         cardTitle.textContent = tree.commonName;
         cardSpecies.textContent = tree.species;
         cardDesc.textContent = tree.description;
+        benefitsText.textContent = tree.benefits;
+
+        // Update Season Badge
+        const inSeason = isTreeInSeason(tree);
+        seasonBadge.className = `season-badge ${inSeason ? 'in-season' : 'out-season'}`;
+        seasonText.textContent = tree.harvestSeason.pt;
+        seasonMonths.textContent = tree.harvestSeason.pt;
+
         infoCard.classList.remove('hidden');
 
         // Update Marker
@@ -250,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const marker = markers[tree.id];
             marker.setIcon(createCustomIcon(marker.treeStyle, true));
             marker.setZIndexOffset(1000);
-            map.flyTo([tree.lat, tree.lng], 19, {
+            map.flyTo([tree.latitude, tree.longitude], 19, {
                 animate: true,
                 duration: 1.5
             });
@@ -266,13 +216,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Clear route status/button
-        routeStatus.textContent = "";
+        // Reset route button
+        routeStatus.textContent = '';
         btnRoute.disabled = false;
-        btnRoute.textContent = "Traçar Rota";
+        btnRoute.textContent = 'Traçar Rota';
     }
 
-    // Search Logic
+    // Tab switching
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentTab = tab.dataset.tab;
+            updateTreeList();
+        });
+    });
+
+    // Search
     searchInput.addEventListener('input', (e) => {
         const term = e.target.value.toLowerCase();
         const items = document.querySelectorAll('.tree-item');
@@ -289,16 +249,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Routing Logic
+    // Routing
     btnRoute.addEventListener('click', () => {
         if (!selectedTree) return;
 
-        btnRoute.textContent = "Localizando você...";
+        btnRoute.textContent = 'Localizando você...';
         btnRoute.disabled = true;
 
         if (!navigator.geolocation) {
-            alert("Seu navegador não suporta geolocalização.");
-            btnRoute.textContent = "Erro de GPS";
+            alert('Seu navegador não suporta geolocalização.');
+            btnRoute.textContent = 'Erro de GPS';
             return;
         }
 
@@ -307,76 +267,68 @@ document.addEventListener('DOMContentLoaded', () => {
                 const userLat = position.coords.latitude;
                 const userLng = position.coords.longitude;
 
-                btnRoute.textContent = "Traçando rota...";
+                btnRoute.textContent = 'Traçando rota...';
 
-                // Remove existing route
                 if (currentRouteControl) {
                     map.removeControl(currentRouteControl);
                 }
 
-                // Create new route
                 currentRouteControl = L.Routing.control({
                     waypoints: [
                         L.latLng(userLat, userLng),
-                        L.latLng(selectedTree.lat, selectedTree.lng)
+                        L.latLng(selectedTree.latitude, selectedTree.longitude)
                     ],
                     routeWhileDragging: true,
                     lineOptions: {
-                        styles: [{ color: '#6FA1EC', opacity: 1, weight: 5 }]
+                        styles: [{ color: '#27ae60', opacity: 1, weight: 5 }]
                     },
-                    createMarker: function (i, wp, nWps) {
-                        // Custom markers for start/end if needed, or null to obey default/markers
-                        if (i === nWps - 1) {
-                            return null; // Don't replace our destination marker
-                        }
+                    createMarker: function(i, wp, nWps) {
+                        if (i === nWps - 1) return null;
                         return L.marker(wp.latLng, {
                             draggable: true,
                             icon: L.icon({
-                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+                                iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
                                 shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png',
                                 iconSize: [25, 41],
                                 iconAnchor: [12, 41],
                                 popupAnchor: [1, -34],
                                 shadowSize: [41, 41]
                             })
-                        }).bindPopup("Sua Localização");
+                        }).bindPopup('Sua Localização');
                     },
                     addWaypoints: false,
                     draggableWaypoints: false,
                     fitSelectedRoutes: true,
-                    show: false // Don't show the itinerary container by default
+                    show: false
                 }).addTo(map);
 
-                // Handle Routing Errors
-                currentRouteControl.on('routingerror', function (e) {
+                currentRouteControl.on('routingerror', function(e) {
                     console.error('Routing error:', e);
-                    alert("Não foi possível traçar a rota. Verifique se há caminhos mapeados até este local.");
-                    btnRoute.textContent = "Erro na Rota";
+                    alert('Não foi possível traçar a rota. Verifique se há caminhos mapeados até este local.');
+                    btnRoute.textContent = 'Erro na Rota';
                 });
 
-                currentRouteControl.on('routesfound', function (e) {
+                currentRouteControl.on('routesfound', function(e) {
                     const routes = e.routes;
                     const summary = routes[0].summary;
-                    // round to 1 decimal place
                     const dist = (summary.totalDistance / 1000).toFixed(2);
                     const time = Math.round(summary.totalTime / 60);
-                    routeStatus.textContent = `Distância: ${dist} km | Tempo: ~${time} min`;
-                    btnRoute.textContent = "Rota Traçada";
+                    routeStatus.textContent = `📍 ${dist} km | ⏱️ ~${time} min`;
+                    btnRoute.textContent = 'Rota Traçada';
 
-                    // Close card on mobile to see map
                     if (window.innerWidth <= 768) {
                         infoCard.classList.add('hidden');
                     }
                 });
             },
             (error) => {
-                console.error("Geolocation error:", error);
-                let msg = "Erro ao obter localização.";
-                if (error.code === 1) msg = "Permissão de localização negada.";
-                else if (error.code === 2) msg = "Localização indisponível.";
-                else if (error.code === 3) msg = "Tempo limite esgotado.";
+                console.error('Geolocation error:', error);
+                let msg = 'Erro ao obter localização.';
+                if (error.code === 1) msg = 'Permissão de localização negada.';
+                else if (error.code === 2) msg = 'Localização indisponível.';
+                else if (error.code === 3) msg = 'Tempo limite esgotado.';
                 alert(msg);
-                btnRoute.textContent = "Tentar Novamente";
+                btnRoute.textContent = 'Tentar Novamente';
                 btnRoute.disabled = false;
             },
             { enableHighAccuracy: true }
@@ -391,8 +343,6 @@ document.addEventListener('DOMContentLoaded', () => {
             marker.setIcon(createCustomIcon(marker.treeStyle, false));
             marker.setZIndexOffset(0);
             selectedTree = null;
-
-            // Remove active class from list
             document.querySelectorAll('.tree-item').forEach(item => item.classList.remove('active'));
         }
     });
@@ -401,7 +351,6 @@ document.addEventListener('DOMContentLoaded', () => {
         sidebar.classList.toggle('open');
     });
 
-    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', (e) => {
         if (window.innerWidth <= 768) {
             if (!sidebar.contains(e.target) && !menuToggle.contains(e.target) && sidebar.classList.contains('open')) {
