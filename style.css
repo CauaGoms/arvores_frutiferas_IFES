@@ -451,15 +451,17 @@ body {
 .card-actions {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 8px;
+    gap: 12px;
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, var(--ifes-primary), #005fa1);
+    background: linear-gradient(135deg, var(--ifes-primary), #2ecc71);
     color: white;
     border: none;
-    padding: 12px 20px;
+    padding: 14px 24px;
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
@@ -467,9 +469,10 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-md);
+    min-height: 48px;
 }
 
 .btn-primary:hover {
@@ -618,6 +621,7 @@ body {
 @media (max-width: 768px) {
     .menu-toggle {
         display: flex;
+        z-index: 1000;
     }
 
     .sidebar {
@@ -628,6 +632,7 @@ body {
         transform: translateX(-100%);
         transition: transform 0.3s ease-out;
         border-radius: 0 20px 20px 0;
+        z-index: 999;
     }
 
     .sidebar.open {
@@ -659,8 +664,10 @@ body {
         left: 0;
         right: 0;
         border-radius: 20px 20px 0 0;
-        max-height: 65vh;
-        padding: 20px 16px;
+        max-height: 60vh;
+        padding: 24px 16px 80px 16px;
+        overflow-y: auto;
+        z-index: 100;
     }
 
     .card-header {
@@ -674,6 +681,18 @@ body {
     .tabs-container {
         display: none;
     }
+
+    /* Leaflet controls positioning for mobile */
+    .leaflet-control-zoom {
+        margin-bottom: 80px !important;
+        margin-right: 10px !important;
+    }
+
+    .leaflet-routing-container {
+        max-height: 150px;
+        overflow-y: auto;
+        font-size: 0.85rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -683,20 +702,71 @@ body {
     }
 
     .info-card {
-        max-height: 50vh;
+        max-height: 55vh;
         border-radius: 16px 16px 0 0;
+        padding: 20px 12px 75px 12px;
     }
 
     #card-title {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
     }
 
     .btn-primary {
-        padding: 10px 16px;
+        padding: 12px 18px;
         font-size: 0.95rem;
+        border-radius: 6px;
     }
 
     .card-species {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        margin-bottom: 12px;
+    }
+
+    .season-badge {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        margin-bottom: 12px;
+    }
+
+    .card-location {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+    }
+
+    .card-benefits {
+        font-size: 0.8rem;
+    }
+
+    /* Better button spacing */
+    .info-card button {
+        min-height: 44px;
+        margin-bottom: 8px;
+    }
+
+    /* Leaflet controls for small screens */
+    .leaflet-control-zoom {
+        margin-bottom: 75px !important;
+        margin-right: 8px !important;
+    }
+
+    .leaflet-control-zoom a {
+        width: 36px !important;
+        height: 36px !important;
+        font-size: 16px !important;
+        line-height: 36px !important;
+    }
+
+    .leaflet-routing-container {
+        font-size: 0.75rem;
+        max-height: 120px;
+    }
+
+    /* Menu toggle better positioned */
+    .menu-toggle {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+        min-height: 44px;
     }
 }

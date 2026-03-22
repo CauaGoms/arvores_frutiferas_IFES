@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize Map
+    // Initialize Map with responsive zoom
+    const isMobile = window.innerWidth <= 768;
+    const initialZoom = isMobile ? 16 : 18;
+    
     const map = L.map('map', {
         zoomControl: false
-    }).setView([-20.803, -41.155], 18);
+    }).setView([-20.803, -41.155], initialZoom);
 
     L.control.zoom({
-        position: 'topright'
+        position: isMobile ? 'bottomright' : 'topright'
     }).addTo(map);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
